@@ -5,6 +5,7 @@ import Link from "next/link";
 import VisitorCounter from "@/components/VisitorCounter";
 import AdHeader from "@/components/ads/AdHeader";
 import AdMobileSticky from "@/components/ads/AdMobileSticky";
+import { FeedbackButton } from "@/components/FeedbackButton";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 
@@ -70,6 +71,20 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           </div>
         </footer>
         <AdMobileSticky />
+        <FeedbackButton siteName="Why This War" siteUrl="https://why-this-war.vercel.app" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Why This War",
+              "url": "https://why-this-war.vercel.app",
+              "description": "In-depth explainers on the historical causes, geopolitical factors, and root issues behind ongoing wars",
+              "publisher": { "@type": "Organization", "name": "Why This War", "url": "https://why-this-war.vercel.app" }
+            })
+          }}
+        />
       </body>
     </html>
   );
