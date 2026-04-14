@@ -1,9 +1,12 @@
 import conflicts from '@/public/data/conflicts.json'
 import SearchFilter from '@/components/SearchFilter'
 
-export const metadata = {
-  title: 'Why This War — Understand Every Conflict | Explained',
-  description: 'Clear, neutral explainers for every major ongoing armed conflict. What is happening, who is fighting, and why.',
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Why This War | Real-Time Conflict Intelligence',
+  description: 'In-depth explainers on the historical causes, geopolitical factors, and root issues behind ongoing wars worldwide',
+  keywords: 'why wars happen, conflict causes, geopolitical analysis, war explanation, conflict background, war origins',
 }
 
 export default function Home() {

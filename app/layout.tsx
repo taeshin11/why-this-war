@@ -9,9 +9,30 @@ import AdMobileSticky from "@/components/ads/AdMobileSticky";
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Why This War — Conflict Explainer | Understand Every War",
-  description: "Clear explainers for every major ongoing conflict: what's happening, who's involved, why it started.",
-};
+  title: {
+    default: 'Why This War | Real-Time Intelligence',
+    template: '%s | Why This War'
+  },
+  description: 'In-depth explainers on the historical causes, geopolitical factors, and root issues behind ongoing wars worldwide',
+  keywords: 'why wars happen, conflict causes, geopolitical analysis, war explanation, conflict background, war origins',
+  openGraph: {
+    type: 'website',
+    siteName: 'Why This War',
+    title: 'Why This War | Real-Time Intelligence',
+    description: 'In-depth explainers on the historical causes, geopolitical factors, and root issues behind ongoing wars worldwide',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Why This War',
+    description: 'In-depth explainers on the historical causes, geopolitical factors, and root issues behind ongoing wars worldwide',
+  },
+  verification: {
+    google: 'add-your-google-site-verification-here',
+  },
+  other: {
+    'google-adsense-account': 'ca-pub-add-your-publisher-id-here',
+  },
+}
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
@@ -35,9 +56,17 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         </header>
         <main className="flex-1 w-full">{children}</main>
         <footer className="bg-slate-900 text-slate-400 border-t border-slate-800 py-8 mt-16">
-          <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
-            <p className="text-sm">© 2025 Why This War. All rights reserved.</p>
-            <VisitorCounter />
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm border-t border-slate-700 pt-6 mb-4 mt-4">
+              <a href="/about" className="hover:text-white transition-colors">About Us</a>
+              <a href="/faq" className="hover:text-white transition-colors">How to Use &amp; FAQ</a>
+              <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="/terms" className="hover:text-white transition-colors">Terms of Service</a>
+            </div>
+            <div className="flex items-center justify-between">
+              <p className="text-sm">© 2025 Why This War. All rights reserved.</p>
+              <VisitorCounter />
+            </div>
           </div>
         </footer>
         <AdMobileSticky />
