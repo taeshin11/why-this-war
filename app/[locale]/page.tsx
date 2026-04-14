@@ -1,7 +1,7 @@
+import type { Metadata } from 'next'
+import { setRequestLocale } from 'next-intl/server'
 import conflicts from '@/public/data/conflicts.json'
 import SearchFilter from '@/components/SearchFilter'
-
-import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Why This War | Real-Time Conflict Intelligence',
@@ -9,7 +9,10 @@ export const metadata: Metadata = {
   keywords: 'why wars happen, conflict causes, geopolitical analysis, war explanation, conflict background, war origins',
 }
 
-export default function Home() {
+export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  setRequestLocale(locale)
+
   const active = conflicts.filter(c => c.status === 'active')
   const frozen = conflicts.filter(c => c.status !== 'active')
   const allTags = new Set(conflicts.flatMap((c: { tags: string[] }) => c.tags)).size

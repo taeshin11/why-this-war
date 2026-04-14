@@ -3,13 +3,15 @@ import ExplainerSection from '@/components/ExplainerSection'
 import SectionNav from '@/components/SectionNav'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { setRequestLocale } from 'next-intl/server'
 import type { Metadata } from 'next'
 
 export async function generateStaticParams() {
-  return conflicts.map(c => ({ slug: c.slug }))
+  const locales = ['en', 'ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt']
+  return locales.flatMap(locale => conflicts.map(c => ({ locale, slug: c.slug })))
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const conflict = conflicts.find(c => c.slug === slug)
   if (!conflict) return {}
@@ -29,8 +31,10 @@ const statusBadge: Record<string, string> = {
   resolved: 'bg-green-100 text-green-700',
 }
 
-export default async function ConflictPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
+export default async function ConflictPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
+  const { locale, slug } = await params
+  setRequestLocale(locale)
+
   const conflict = conflicts.find(c => c.slug === slug)
   if (!conflict) notFound()
 
@@ -47,7 +51,7 @@ export default async function ConflictPage({ params }: { params: Promise<{ slug:
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="max-w-4xl">
-        <Link href="/" className="text-sm text-blue-600 hover:underline mb-4 block">← Back to all conflicts</Link>
+        <Link href={`/${locale}`} className="text-sm text-blue-600 hover:underline mb-4 block">← Back to all conflicts</Link>
         <div className="flex items-center gap-3 mb-2">
           <span className="text-3xl">{conflict.flag_a}</span>
           <span className="text-gray-300">vs</span>
@@ -58,7 +62,7 @@ export default async function ConflictPage({ params }: { params: Promise<{ slug:
         <p className="text-gray-500 mb-2">{conflict.country_a} vs {conflict.country_b} · Since {conflict.start_date}</p>
         <div className="flex flex-wrap gap-1 mb-6">
           {conflict.tags.map(tag => (
-            <Link key={tag} href={`/tag/${tag}`} className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded hover:bg-gray-200">#{tag}</Link>
+            <Link key={tag} href={`/${locale}/tag/${tag}`} className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded hover:bg-gray-200">#{tag}</Link>
           ))}
         </div>
 
