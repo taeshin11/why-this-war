@@ -32,10 +32,10 @@ export const metadata: Metadata = {
     description: 'In-depth explainers on the historical causes, geopolitical factors, and root issues behind ongoing wars worldwide',
   },
   verification: {
-    google: 'add-your-google-site-verification-here',
+    google: 'WddgcbVJsL2BGHNAje5m6DK56IcR0Mw5UOqozI2Xtrc',
   },
   other: {
-    'google-adsense-account': 'ca-pub-add-your-publisher-id-here',
+    'google-adsense-account': 'ca-pub-7098271335538021',
   },
 }
 
